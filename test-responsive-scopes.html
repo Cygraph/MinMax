@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>responsive-scopes.js test</title>
+    
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="last-modified" content="2019-01-12@01:10:00 TMZ">
+	
+    <link href="css/test-responsive-scopes.css" rel="stylesheet" media="all">
+    
+    <script src="js/libs/jquery-3.2.1.min.js"></script>
+    <script src="js/responsive-scopes.js"></script>
+    <script src="js/test-responsive-scopes.js"></script>
+    
+	
+</head>
+<body>
+    
+    <ul>
+        <li>
+            <button type="button" 
+            onclick="javascript:$.ResponsiveScopes.get().callbacks=true">callbacks</button>
+        </li>
+        <li>
+            <button type="button" 
+            onclick="javascript:$.ResponsiveScopes.get().callbacks=false">no callbacks</button>
+        </li>
+        <li>
+            <button type="button" 
+            onclick="javascript:$.ResponsiveScopes.get().autoUpdate=true">autoUpdate</button>
+        </li>
+        <li>
+            <button type="button" 
+            onclick="javascript:$.ResponsiveScopes.get().autoUpdate=false">no autoUpdate</button>
+        </li>
+    
+    </ul>
+    
+    
+	
+</body>
+</html>
+
+	
