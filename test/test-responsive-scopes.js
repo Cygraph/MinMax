@@ -15,14 +15,14 @@ Updated: 2019-01-09
     
     function onDoc () { 
         $.ResponsiveScopes.defaults({
-            breakpoints: { s: 0, m: 800, l: 1920 }
+            breakpoints: { sm: 0, md: 800, lg: 1920 }
         });
         
         console.log( "ResponsiveScopes.defaults", $.ResponsiveScopes.defaults());
         
         var r1 = $.ResponsiveScopes( null, "r1" );
         
-        var r2 = $.ResponsiveScopes([["s"], ["l", 800]], { 
+        var r2 = $.ResponsiveScopes([["sm"], ["lg", 800]], { 
             id:"r2",
             callbacks: false
         });
@@ -32,7 +32,7 @@ Updated: 2019-01-09
         
         r1.formated( handleRSFormated );
         
-        // Callbacks won't work now
+        // Callbacks won't work now - callbacks is set to false
         r2.changed( handleRSChanged );
     }
     
