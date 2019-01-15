@@ -92,7 +92,7 @@ function  handleFormatChange ( e ) {
 - **value**:  number / getter
 - **format**: string / getter
 - **ratio**: number / getter
-- **map**:  array / getter
+- **scopes**:  array / getter
 - **lable**:  string / getter
 - **separator**:  string / getter-setter
 - **inertia**:  number / getter-setter
