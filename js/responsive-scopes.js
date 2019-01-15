@@ -2,9 +2,9 @@
 File: breakspaces.js
 Dependencies: jQuery,
 Globals: none
-Designer: © Michael Schwarz, CyDot, look@cydot.de
-Vers. 0.7.0 
-Updated 2019-01-09
+Designer: © Michael Schwarz, CyDot, info@cydot.de
+Vers. 0.8.0 
+Updated: 2019-01-15
 
 -------------------------------------------
 
@@ -19,8 +19,6 @@ ResponsiveScopes defines window width scopes with label, min and max properties.
 - down (changed to lower space)
 - formated (changed format. For instance "portrait" to "landscape").
 
-Min breakpoints are used to calculate the scopes map
-
 ResponsiveScopes can infix a label in an url, in order to load the appropriate image size.
 
 ResponsiveScopes private properties are protected and can not coincidently be overwritten by an assignment operator. It uses JQuery and has no further script dependencies.
@@ -31,7 +29,7 @@ Tip: Synchronize ResponsiveScopes with css min / max breakpoints in order to con
 
 -------------------------------------------
 
-Properties:
+Instance properties:
 
 previousIndex:  number / getter
 index:  number / getter
@@ -41,7 +39,7 @@ max:  number / getter
 value:  number / getter
 format: string / getter
 ratio: number / getter
-map:  array / getter
+scopes:  array / getter
 lable:  string / getter
 separator:  string / getter-setter
 inertia:  number / getter-setter
@@ -49,7 +47,7 @@ autoUpdate:  boolean / getter-setter
 callbacks:  boolean / getter-setter
 hasCallbacks:  boolean / getter
 
-Methods:
+Instance methods:
 
 update()
 define( obj_or_array )
@@ -62,7 +60,7 @@ formated( callbacks )
 infix( url )
 unfix( url )
 
-Event object:
+Event object properties:
 
 previousIndex
 index
@@ -117,7 +115,9 @@ instance
         callbacks: true
     },
     
-    defaultBreakpoints = [["xs"],["sm", 480],["md", 768],["lg", 1008],["xl", 1280]],
+    defaultBreakpoints = [
+        ["xs"],["sm", 480],["md", 768],["lg", 1008],["xl", 1280]
+    ],
         
     defaultDefs = {
         breakpoints: {
@@ -225,14 +225,14 @@ instance
             }
         },
         
-        map: {
+        scopes: {
             enumerable: true,
             get: function () {
-                return this._map ? this._map.slice( 0 ) : undefined;
+                return this._scopes ? this._scopes.slice( 0 ) : undefined;
             }
         },
         
-        _map: { configurable: true },
+        _scopes: { configurable: true },
         
         separator: {
             enumerable: true,
@@ -371,31 +371,11 @@ instance
         
     pubMethods = {
         
-        define: function ( entries ) {
-            if ( $.isPlainObject( entries )) {
-                entries = Object.entries( entries );
-            }
-            else if ( ! $.isArray( entries )) {
-                return this;
-            };
-            
-            if ( entries.length >= 2 ) {
-                entries.sort( function ( a, b ) {
-                    if ( ! a[ 1 ] || a[ 1 ] < b[ 1 ]) return -1;
-                    if ( a[ 1 ] > b[ 1 ]) return 1;
-                    return 0;
-                });
-                entries[ 0 ][ 1 ] = 0;
-                this._createMap( entries );
-            };
-            return this;
-        },
-        
         update: function () {
             var w = $win.width(), e = this._eventObj, scope;
             
-            for ( var i = 0; i < this._map.length; i++ ) {
-                scope = this._map[ i ];
+            for ( var i = 0; i < this._scopes.length; i++ ) {
+                scope = this._scopes[ i ];
 
                 if ( w <= scope.max ) {
                     this._setPriv( "scope", scope );
@@ -411,6 +391,23 @@ instance
                     return this;
                 }
             };
+            return this;
+        },
+        
+        define: function ( entries ) {
+            if ( $.isPlainObject( entries )) {
+                entries = Object.entries( entries );
+            }
+            else if ( ! $.isArray( entries )) {
+                return this;
+            };
+            
+            var scopes = this._createScopes( entries );
+            
+            this._setPriv( "entries", entries);
+            this._setPriv( "scopes", scopes );
+            this._updateLabels();
+            
             return this;
         },
         
@@ -495,24 +492,35 @@ instance
             Object.defineProperty( this, key, def );
         },
         
-        _createMap: function ( entries ) {
-            if ( entries ) this._setPriv( "entries", entries);
+        _createScopes: function ( entries ) {
+            var scopes = [],
+            len = entries.length;
             
-            var map = [],
-            labels = [],
-            len = this._entries.length;
+            entries.sort( function ( a, b ) {
+                if ( ! a[ 1 ] || a[ 1 ] < b[ 1 ]) return -1;
+                if ( a[ 1 ] > b[ 1 ]) return 1;
+                return 0;
+            });
+            
+            entries[ 0 ][ 1 ] = 0;
             
             for ( var i = 0; i < len; i ++ ) {
-                map[ i ] = new Scope(
-                    this._entries[ i ][ 0 ],
-                    this._entries[ i ][ 1 ],
-                    i < len - 1 ? this._entries[ i + 1 ][ 1 ] - 1 : Infinity
+                scopes[ i ] = new Scope(
+                    entries[ i ][ 0 ],
+                    entries[ i ][ 1 ],
+                    i < len - 1 ? entries[ i + 1 ][ 1 ] - 1 : Infinity
                 );
-                
-                labels[ i ] = map[ i ].label;
+            };
+            return scopes;
+        },
+        
+        _updateLabels: function () {
+            var labels = [];
+            
+            for ( var i = 0; i < this._scopes.length; i ++ ) {
+                labels.push( this._scopes[ i ].label );
             };
             this._setPriv( "labels", labels );
-            this._setPriv( "map", map );
         },
         
         _checkCallbacks: function () {
@@ -546,11 +554,18 @@ instance
         _initStateOfInertia: function () {
             clearTimeout( this._timerID );
             this._cachedWidth = $win.width();
-            this._timerID = setTimeout( this._proofStateOfInertia.bind( this ), this._inertia );
+            
+            if ( this._inertia ) {
+                this._timerID = setTimeout(
+                    this._hasResizeEnded.bind( this ),
+                    this._inertia
+                )
+            }
+            else this._handleResized();
         },
         __initStateOfInertia: $.noop,
         
-        _proofStateOfInertia: function () {
+        _hasResizeEnded: function () {
             if ( this._cachedWidth === $win.width()) {
                 this._handleResized();
             }
