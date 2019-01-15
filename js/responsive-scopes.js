@@ -1,9 +1,9 @@
 /*
-File: breakspaces.js
+File: responsive-scopes.js
 Dependencies: jQuery,
 Globals: none
 Designer: © Michael Schwarz, CyDot, info@cydot.de
-Vers. 0.8.0 
+Vers. 0.8.1 
 Updated: 2019-01-15
 
 -------------------------------------------
