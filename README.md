@@ -2,11 +2,11 @@
 
 ### ResponsiveScopes is a jQuery based designer tool to synchronize and control reponsive layout changes
 
-ResponsiveScopes defines window width scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
+ResponsiveScopes defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
 
-Min breakpoints are used to calculate the scopes map.
+Min breakpoints are used to calculate the scopes.
 
-ResponsiveScopes can infix a label in a responsive url (in order to load the appropriate image size).
+ResponsiveScopes can infix a label in a responsive url.
 
 Callbacks can be attached to the following events: 
 
@@ -17,48 +17,18 @@ Callbacks can be attached to the following events:
 - **formated** (triggered at format change. For instance "portrait" to "landscape").
 
 
-Example
-
 ```
 
-// First argument: array of "min" breakpoints in entry format
-// Each with scope label and minimum width
+// First argument: array of "min" breakpoints in entry or object format
 // Second argument: options object or instance id
 
-var rs = $.ResponsiveScopes([["sm"], ["md", 768], ["lg", 1280]], "rs1" );
+var breakpoints = { sm: 0, md: 768, lg: 1280 };
 
-// Call it from anywhere
+var rs = $.ResponsiveScopes( breakpoints, "rs1" );
 
-var rs = $.ResponsiveScopes.get( "rs1" );
+rs.changed( handleScopeChange );
 
-// Add callbacks
-
-rs.up( doLoadBiggerImage );
-rs.formated( doLayoutStuff );
-
-// Same as
-
-rs.on( "formated", doLayoutStuff );
-
-// Removes a certain callback
-
-rs.off( formated, doLayoutStuff );
-
-// Removes all callbacks from formated
-
-rs.off( formated );
-
-// Removes all callbacks from instance rs
-
-rs.off();
-
-// Stops all callbacks from instance rs
-
-rs.callbacks = false;
-
-// Reactivates all callbacks
-
-rs.callbacks = true;
+rs.formated( handleFormatChange );
 
 ```
 
@@ -79,11 +49,11 @@ rs.callbacks = true;
 - **ratio**
 
 
-Example
+Callback
 
 ```
 
-function callbackFn ( e ) {
+function handleScopeChange ( e ) {
     
     var rs = e.instance;
     
@@ -93,15 +63,20 @@ function callbackFn ( e ) {
     
     img.src = rs.infix( img.src );
     
+    if ( e.change > 0 && e.index === 2 ) {
+        doBigChangeThings();
+    }
+    
+    // ...
+}
+
+function  handleFormatChange ( e ) {
+    
     if ( e.format === "portrait" ) {
         doPortraitLayoutThings();
     }
     else if ( e.ratio > 1.6 ) {
         doBroadStageStuff();
-    }
-    
-    if ( e.change > 0 && e.index === 2 ) {
-        doBigChangeThings();
     }
     
     // ...
@@ -127,30 +102,6 @@ function callbackFn ( e ) {
 - **callbacks**:  boolean / getter-setter
 - **hasCallbacks**:  boolean / getter
 
-
-Example
-
-```
-// Modifications on the instance with setters
-
-// Quiets all callbacks
-
-rs.callbacks = false;
-
-// Turns callbacks on again
-
-rs.callbacks = true;
-
-// Sets the inertia time for the resize event
-
-rs.inertia = 333;
-
-// Sets the separator for label infixes
-
-rs.separator = "--";
-
-```
-
 ### Instance methods
 
 - **update()**
@@ -163,27 +114,5 @@ rs.separator = "--";
 - **formated( callbacks )**
 - **infix( url )**
 - **unfix( url )**
-
-
-Example
-
-```
-
-// Redefine breakpoints
-
-rs.define({ sm: 0, lg: 1008 });
-
-// Infix label endings in an url (in this case at label "lg")
-
-var infixed = rs.infix( "images/respImg.png" );
-
-// infixed is then "images/respImg_lg.png"
-
-// Same with already infixed url "images/respImg_sm.png"
-// infixed is then "images/respImg_lg.png"
-// It recognizes own label endings and replaces them with the current label
-// By default the separator is "_". This can be changed.
-
-```
 
 **Tip:** Synchronize ResponsiveScopes with css min / max breakpoints
