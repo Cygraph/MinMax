@@ -5,9 +5,7 @@
 ResponsiveScopes defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
 
 Min breakpoints are used to calculate the scopes.
-
 ResponsiveScopes can infix a label in a responsive url.
-
 Callbacks can be attached to the following events: 
 
 
