@@ -30,14 +30,14 @@ Updated: 2019-01-09
         console.log( "ResponsiveScopes 1", r1.id, r1.scopes );
         console.log( "ResponsiveScopes 2", r2.id, r2.scopes );
         
-        r1.formated( handleRSFormated );
+        r1.orientated( handleRSFormated );
         
         // Callbacks won't work now - callbacks is set to false
         r2.changed( handleRSChanged );
     }
     
     function handleRSFormated ( e ) {
-        console.log( "formated", e.id, e.format, e );
+        console.log( "orientated", e.id, e.format, e );
     }
     
     function handleRSChanged ( e ) {
