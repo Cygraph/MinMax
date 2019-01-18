@@ -17,7 +17,7 @@ ResponsiveScopes defines window width scopes with label, min and max properties.
 - changed (from one space to another)
 - up  (changed to higher space)
 - down (changed to lower space)
-- formated (changed format. For instance "portrait" to "landscape").
+- orientated (changed orientation "portrait" or "landscape").
 
 ResponsiveScopes can infix a label in an url, in order to load the appropriate image size.
 
@@ -37,7 +37,7 @@ change:  number / getter
 min:  number / getter
 max:  number / getter
 value:  number / getter
-format: string / getter
+orientation: string / getter
 ratio: number / getter
 scopes:  array / getter
 lable:  string / getter
@@ -56,7 +56,7 @@ off( type, callbacks )
 changed( callbacks )
 up( callbacks )
 down( callbacks )
-formated( callbacks )
+orientated( callbacks )
 infix( url )
 unfix( url )
 
@@ -69,7 +69,7 @@ min
 max
 value
 previousFormat
-format
+orientation
 ratio
 label
 id
@@ -211,10 +211,10 @@ instance
             }
         },
         
-        format: {
+        orientation: {
             enumerable: true,
             get: function () {
-                return this._eventObj.format;
+                return this._eventObj.orientation;
             }
         },
         
@@ -359,14 +359,14 @@ instance
         value: null,
         ratio: null,
         previousFormat: null,
-        format: null
+        orientation: null
     },
     
     callbacks = {
         up: null,
         down: null,
         changed: null,
-        formated: null
+        orientated: null
     },
         
     pubMethods = {
@@ -382,8 +382,8 @@ instance
                     
                     e.value = w;
                     e.ratio = w / $win.height();
-                    e.previousFormat = e.format;
-                    e.format = e.ratio > 1 ? "landscape" : "portrait";
+                    e.previousFormat = e.orientation;
+                    e.orientation = e.ratio > 1 ? "landscape" : "portrait";
                     e.previousIndex = e.index !== null ? e.index : i;
                     e.index = i;
                     e.change = i - e.previousIndex;
@@ -463,8 +463,8 @@ instance
             return this.on( "changed", callbacks );
         },
         
-        formated: function ( callbacks ) {
-            return this.on( "formated", callbacks );
+        orientated: function ( callbacks ) {
+            return this.on( "orientated", callbacks );
         },
         
         infix: function ( url ) {
@@ -577,9 +577,9 @@ instance
             if ( this._callbacksEnabled ) {
                 var e = this._eventObj, cb = this._callbacks;
                 
-                if ( e.format !== e.previousFormat && cb.formated.has()) {
-                    cb.formated.fireWith( null, [
-                        this._getEventObject( "formated" )
+                if ( e.orientation !== e.previousFormat && cb.orientated.has()) {
+                    cb.orientated.fireWith( null, [
+                        this._getEventObject( "orientated" )
                     ]);
                 }
                 if ( e.change && cb.changed.has()) {
