@@ -1,10 +1,10 @@
 /*
-File: responsive-scopes.js
+File: minmax.js
 Dependencies: jQuery,
 Globals: none
 Designer: © Michael Schwarz, CyDot, info@cydot.de
-Vers. 0.8.1 
-Updated: 2019-01-15
+Vers. 0.9.0 
+Updated: 2019-01-18
 
 -------------------------------------------
 
