@@ -31,7 +31,7 @@ Tip: Synchronize ResponsiveScopes with css min / max breakpoints in order to con
 
 Instance properties:
 
-previousIndex:  number / getter
+prevIndex:  number / getter
 index:  number / getter
 change:  number / getter
 min:  number / getter
@@ -62,13 +62,13 @@ unfix( url )
 
 Event object properties:
 
-previousIndex
+prevIndex
 index
 change
 min
 max
 value
-previousFormat
+prevOrientation
 orientation
 ratio
 label
@@ -190,10 +190,10 @@ instance
             }
         },
         
-        previousIndex: {
+        prevIndex: {
             enumerable: true,
             get: function () {
-                return this._eventObj.previousIndex;
+                return this._eventObj.prevIndex;
             }
         },
         
@@ -354,11 +354,11 @@ instance
     
     eventObj = {
         index: null,
-        previousIndex: null,
+        prevIndex: null,
         change: null,
         value: null,
         ratio: null,
-        previousFormat: null,
+        prevOrientation: null,
         orientation: null
     },
     
@@ -382,11 +382,11 @@ instance
                     
                     e.value = w;
                     e.ratio = w / $win.height();
-                    e.previousFormat = e.orientation;
+                    e.prevOrientation = e.orientation;
                     e.orientation = e.ratio > 1 ? "landscape" : "portrait";
-                    e.previousIndex = e.index !== null ? e.index : i;
+                    e.prevIndex = e.index !== null ? e.index : i;
                     e.index = i;
-                    e.change = i - e.previousIndex;
+                    e.change = i - e.prevIndex;
                     
                     return this;
                 }
@@ -577,7 +577,7 @@ instance
             if ( this._callbacksEnabled ) {
                 var e = this._eventObj, cb = this._callbacks;
                 
-                if ( e.orientation !== e.previousFormat && cb.orientated.has()) {
+                if ( e.orientation !== e.prevOrientation && cb.orientated.has()) {
                     cb.orientated.fireWith( null, [
                         this._getEventObject( "orientated" )
                     ]);

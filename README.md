@@ -12,7 +12,7 @@ Callbacks can be attached to the following events:
 - **changed** (triggered at any scope change)
 - **up**  (triggered at change to higher scope)
 - **down** (triggered at change to lower scope)
-- **formated** (triggered at format change. For instance "portrait" to "landscape").
+- **orientated** (triggered at orientation change - "portrait" or "landscape").
 
 
 ```
@@ -20,13 +20,13 @@ Callbacks can be attached to the following events:
 // First argument: array of "min" breakpoints in entry or object format
 // Second argument: options object or instance id
 
-var breakpoints = { sm: 0, md: 768, lg: 1280 };
+var breakpoints = { xs: 0, sm: 480, md: 768, lg: 1280 };
 
 var rs = $.ResponsiveScopes( breakpoints, "rs1" );
 
 rs.changed( handleScopeChange );
 
-rs.formated( handleFormatChange );
+rs.orientated( handleOrientationChange );
 
 ```
 
@@ -37,13 +37,13 @@ rs.formated( handleFormatChange );
 - **id**
 - **label**
 - **index**
-- **previousIndex**
+- **prevIndex**
 - **change**
 - **min**
 - **max**
 - **value**
-- **format**
-- **previousFormat**
+- **orientation**
+- **prevOrientation**
 - **ratio**
 
 
@@ -68,9 +68,9 @@ function handleScopeChange ( e ) {
     // ...
 }
 
-function  handleFormatChange ( e ) {
+function  handleOrientationChange ( e ) {
     
-    if ( e.format === "portrait" ) {
+    if ( e.orientation === "portrait" ) {
         doPortraitLayoutThings();
     }
     else if ( e.ratio > 1.6 ) {
@@ -84,13 +84,13 @@ function  handleFormatChange ( e ) {
 
 ### Instance properties
 
-- **previousIndex**:  number / getter
+- **prevIndex**:  number / getter
 - **index**:  number / getter
 - **change**:  number / getter
 - **min**:  number / getter
 - **max**:  number / getter
 - **value**:  number / getter
-- **format**: string / getter
+- **orientation**: string / getter
 - **ratio**: number / getter
 - **scopes**:  array / getter
 - **lable**:  string / getter
@@ -109,7 +109,7 @@ function  handleFormatChange ( e ) {
 - **changed( callbacks )**
 - **up( callbacks )**
 - **down( callbacks )**
-- **formated( callbacks )**
+- **orientated( callbacks )**
 - **infix( url )**
 - **unfix( url )**
 
