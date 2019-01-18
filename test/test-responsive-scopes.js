@@ -14,26 +14,26 @@ Updated: 2019-01-09
     // M A I N - E V E N T S -------------------------------
     
     function onDoc () { 
-        $.ResponsiveScopes.defaults({
+        $.MinMax.defaults({
             breakpoints: { sm: 0, md: 800, lg: 1920 }
         });
         
-        console.log( "ResponsiveScopes.defaults", $.ResponsiveScopes.defaults());
+        console.log( "MinMax.defaults", $.MinMax.defaults());
         
-        var r1 = $.ResponsiveScopes( null, "r1" );
+        var mm1 = $.MinMax( null, "mm1" );
         
-        var r2 = $.ResponsiveScopes([["sm"], ["lg", 800]], { 
-            id:"r2",
+        var mm2 = $.MinMax([["sm"], ["lg", 800]], { 
+            id:"mm2",
             callbacks: false
         });
         
-        console.log( "ResponsiveScopes 1", r1.id, r1.scopes );
-        console.log( "ResponsiveScopes 2", r2.id, r2.scopes );
+        console.log( "MinMax 1", mm1.id, mm1.scopes );
+        console.log( "MinMax 2", mm2.id, mm2.scopes );
         
-        r1.orientated( handleRSFormated );
+        mm1.orientated( handleRSFormated );
         
         // Callbacks won't work now - callbacks is set to false
-        r2.changed( handleRSChanged );
+        mm2.changed( handleRSChanged );
     }
     
     function handleRSFormated ( e ) {

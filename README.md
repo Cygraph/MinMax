@@ -1,11 +1,11 @@
-# $.ResponsiveScopes.js
+# $.MinMax.js
 
-### ResponsiveScopes is a jQuery based designer tool to synchronize and control reponsive layout changes
+### MinMax is a jQuery based designer tool to synchronize and control reponsive layout changes
 
-ResponsiveScopes defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
+MinMax defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
 
 Min breakpoints are used to calculate the scopes.
-ResponsiveScopes can infix a label in a responsive url.
+MinMax can infix a label in a responsive url.
 Callbacks can be attached to the following events: 
 
 
@@ -22,11 +22,11 @@ Callbacks can be attached to the following events:
 
 var breakpoints = { xs: 0, sm: 480, md: 768, lg: 1280 };
 
-var rs = $.ResponsiveScopes( breakpoints, "rs1" );
+var mm = $.MinMax( breakpoints, "mm1" );
 
-rs.changed( handleScopeChange );
+mm.changed( handleScopeChange );
 
-rs.orientated( handleOrientationChange );
+mm.orientated( handleOrientationChange );
 
 ```
 
@@ -53,13 +53,13 @@ Callback
 
 function handleScopeChange ( e ) {
     
-    var rs = e.instance;
+    var mm = e.instance;
     
     // Update responsive image source
     // Example former "images/respImg_sm.png"
     // Example later "images/respImg_lg.png"
     
-    img.src = rs.infix( img.src );
+    img.src = mm.infix( img.src );
     
     if ( e.change > 0 && e.index === 2 ) {
         doBigChangeThings();
@@ -113,4 +113,4 @@ function  handleOrientationChange ( e ) {
 - **infix( url )**
 - **unfix( url )**
 
-**Tip:** Synchronize ResponsiveScopes with css min / max breakpoints
+**Tip:** Synchronize MinMax with css min / max breakpoints

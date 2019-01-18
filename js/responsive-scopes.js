@@ -8,24 +8,24 @@ Updated: 2019-01-15
 
 -------------------------------------------
 
-ResponsiveScopes is a designer tool for managing responsive layout scripts.
+MinMax is a designer tool for managing responsive layout scripts.
 
 -------------------------------------------
 
-ResponsiveScopes defines window width scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property. Callbacks can be attached to BreakSpace events. 
+MinMax defines layout scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property. Callbacks can be attached to MinMax events: 
 
 - changed (from one space to another)
 - up  (changed to higher space)
 - down (changed to lower space)
 - orientated (changed orientation "portrait" or "landscape").
 
-ResponsiveScopes can infix a label in an url, in order to load the appropriate image size.
+MinMax can infix a label in an url, in order to load the appropriate image size.
 
-ResponsiveScopes private properties are protected and can not coincidently be overwritten by an assignment operator. It uses JQuery and has no further script dependencies.
+MinMax private properties are protected and can not coincidently be overwritten by an assignment operator. It uses JQuery and has no further script dependencies.
 
 -------------------------------------------
 
-Tip: Synchronize ResponsiveScopes with css min / max breakpoints in order to consistently manage responsive layouts.
+Tip: Synchronize MinMax with css min / max breakpoints in order to consistently manage responsive layouts.
 
 -------------------------------------------
 
@@ -79,19 +79,19 @@ instance
 
 ;( function ( $ ) {
     
-    function responsiveScopes ( breakpoints, opts_or_id ) {
-        var b = new ResponsiveScopes( breakpoints, 
+    function minMax ( breakpoints, opts_or_id ) {
+        var b = new MinMax( breakpoints, 
             $.isPlainObject( opts_or_id ) ? opts_or_id : { id: opts_or_id }
         );
         instances[ b.id ] = b;
         return b;
     };
     
-    responsiveScopes.get = function ( id ) {
+    minMax.get = function ( id ) {
         return instances[ id || Object.keys( instances )[ 0 ]];
     };
     
-    responsiveScopes.defaults = function ( options ) {
+    minMax.defaults = function ( options ) {
         if ( options === undefined ) return defaults;
         
         for ( var key in options ) {
@@ -99,7 +99,7 @@ instance
                 defaults[ key ] = options[ key ];
             }
         };
-        return responsiveScopes;
+        return minMax;
     };
     
     var $win = $( window ),
@@ -140,7 +140,7 @@ instance
     Object.defineProperties( defaults, defaultDefs ); 
     
     
-    function ResponsiveScopes ( breakpoints, opts ) {
+    function MinMax ( breakpoints, opts ) {
         
         Object.defineProperty( this, "id", { 
             enumerable: true,
@@ -675,7 +675,7 @@ instance
         }
     };
     
-    $.extend( ResponsiveScopes.prototype, { constructor: ResponsiveScopes }, 
+    $.extend( MinMax.prototype, { constructor: MinMax }, 
         pubMethods, privMethods 
     );
     
@@ -696,6 +696,6 @@ instance
     }
     
     
-    $.ResponsiveScopes = responsiveScopes;
+    $.MinMax = minMax;
     
 })( jQuery );
