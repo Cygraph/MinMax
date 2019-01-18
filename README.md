@@ -26,6 +26,8 @@ var mm = $.MinMax( breakpoints, "mm1" );
 
 mm.changed( handleScopeChange );
 
+mm.up( handleScopeUp )
+
 mm.orientated( handleOrientationChange );
 
 ```
@@ -61,8 +63,26 @@ function handleScopeChange ( e ) {
     
     img.src = mm.infix( img.src );
     
-    if ( e.change > 0 && e.index === 2 ) {
+    if ( e.index < 2 ) {
+        doMobileThings();
+        console.log( "orientation", e.orientation, e.ratio );
+    }
+    
+    if ( Math.abs( e.change > 1 )) {
         doBigChangeThings();
+    }
+    
+    // ...
+}
+
+function handleScopeUp ( e ) {
+    
+    if ( e.index === 3 ) {
+        console.log( "label", e.label );
+    }
+    
+    if ( e.prevIndex < 2 && e.change > 1 ) {
+        console.log( "can happen", e.change );
     }
     
     // ...
@@ -74,7 +94,7 @@ function  handleOrientationChange ( e ) {
         doPortraitLayoutThings();
     }
     else if ( e.ratio > 1.6 ) {
-        doBroadStageStuff();
+        doBroadLandscapeThings();
     }
     
     // ...
