@@ -5,77 +5,7 @@ Globals: none
 Designer: © Michael Schwarz, CyDot, info@cydot.de
 Vers. 0.9.0 
 Updated: 2019-01-18
-
--------------------------------------------
-
-MinMax is a designer tool for managing responsive layout scripts.
-
--------------------------------------------
-
-MinMax defines layout scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property. Callbacks can be attached to MinMax events: 
-
-- changed (from one space to another)
-- up  (changed to higher space)
-- down (changed to lower space)
-- orientated (changed orientation "portrait" or "landscape").
-
-MinMax can infix a label in an url, in order to load the appropriate image size.
-
-MinMax private properties are protected and can not coincidently be overwritten by an assignment operator. It uses JQuery and has no further script dependencies.
-
--------------------------------------------
-
-Tip: Synchronize MinMax with css min / max breakpoints in order to consistently manage responsive layouts.
-
--------------------------------------------
-
-Instance properties:
-
-prevIndex:  number / getter
-index:  number / getter
-change:  number / getter
-min:  number / getter
-max:  number / getter
-value:  number / getter
-orientation: string / getter
-ratio: number / getter
-scopes:  array / getter
-lable:  string / getter
-separator:  string / getter-setter
-inertia:  number / getter-setter
-autoUpdate:  boolean / getter-setter
-callbacks:  boolean / getter-setter
-hasCallbacks:  boolean / getter
-
-Instance methods:
-
-update()
-define( obj_or_array )
-on( type, callbacks )
-off( type, callbacks )
-changed( callbacks )
-up( callbacks )
-down( callbacks )
-orientated( callbacks )
-infix( url )
-unfix( url )
-
-Event object properties:
-
-prevIndex
-index
-change
-min
-max
-value
-prevOrientation
-orientation
-ratio
-label
-id
-instance
-
-------------------------------------------- */
+*/
 
 ;( function ( $ ) {
     
