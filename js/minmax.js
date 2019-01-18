@@ -80,11 +80,11 @@ instance
 ;( function ( $ ) {
     
     function minMax ( breakpoints, opts_or_id ) {
-        var b = new MinMax( breakpoints, 
+        var mm = new MinMax( breakpoints, 
             $.isPlainObject( opts_or_id ) ? opts_or_id : { id: opts_or_id }
         );
-        instances[ b.id ] = b;
-        return b;
+        instances[ mm.id ] = mm;
+        return mm;
     };
     
     minMax.get = function ( id ) {
