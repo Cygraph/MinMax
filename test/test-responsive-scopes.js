@@ -37,7 +37,7 @@ Updated: 2019-01-09
     }
     
     function handleRSFormated ( e ) {
-        console.log( "orientated", e.id, e.orientation, e );
+        console.log( "orientated", e.id, e.format, e );
     }
     
     function handleRSChanged ( e ) {
