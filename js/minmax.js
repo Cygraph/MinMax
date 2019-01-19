@@ -401,7 +401,7 @@ Updated: 2019-01-18
             var parts = this._urlParts( url ),
             name = this._unfixStrg( parts.name );
             
-            return ( parts.path + name + this._separator + this._label + parts.suffix );
+            return ( parts.path + name + this._separator + this._scope.label + parts.suffix );
         },
         
         unfix: function ( url ) {
