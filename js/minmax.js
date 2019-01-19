@@ -3,8 +3,8 @@ File: minmax.js
 Dependencies: jQuery,
 Globals: none
 Designer: © Michael Schwarz, CyDot, info@cydot.de
-Vers. 0.9.0 
-Updated: 2019-01-18
+Vers. 0.9.1 
+Updated: 2019-01-19
 */
 
 ;( function ( $ ) {
@@ -469,19 +469,19 @@ Updated: 2019-01-18
         
         _listen: function () {
             if ( ! this._listening ) {
-                $win.on( "resize", this.__initStateOfInertia );
+                $win.on( "resize", this.__resizeInertia );
                 this._setPriv( "listening", true );
             }
         },
         
         _stopListening: function () {
             if ( this._listening ) {
-                $win.off( "resize", this.__initStateOfInertia );
+                $win.off( "resize", this.__resizeInertia );
                 this._setPriv( "listening", false );
             }
         },
         
-        _initStateOfInertia: function () {
+        _resizeInertia: function () {
             clearTimeout( this._timerID );
             this._cachedWidth = $win.width();
             
@@ -491,17 +491,17 @@ Updated: 2019-01-18
                     this._inertia
                 )
             }
-            else this._handleResized();
+            else this._onResized();
         },
-        __initStateOfInertia: $.noop,
+        __resizeInertia: $.noop,
         
         _hasResizeEnded: function () {
             if ( this._cachedWidth === $win.width()) {
-                this._handleResized();
+                this._onResized();
             }
         },
         
-        _handleResized: function () {
+        _onResized: function () {
             this.update();
 
             if ( this._callbacksEnabled ) {
@@ -593,7 +593,7 @@ Updated: 2019-01-18
         },
         
         _init: function ( options ) {
-            this.__initStateOfInertia = this._initStateOfInertia.bind( this );
+            this.__resizeInertia = this._resizeInertia.bind( this );
             this._configEventObject();
             this._configCallbacks();
             
