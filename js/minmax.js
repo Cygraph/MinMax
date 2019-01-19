@@ -602,6 +602,9 @@ Updated: 2019-01-18
             };
             
             this.update();
+            if ( this._autoUpdate ) {
+                this._listen();
+            }
         }
     };
     
