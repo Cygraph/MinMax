@@ -87,7 +87,7 @@ Updated: 2019-01-18
     }
     
     function createID () {
-        return "rscopes_" + ++ instCounter;
+        return "minmax_" + ++ instCounter;
     }
     
     var propDefs = {
