@@ -1,4 +1,4 @@
-# $.MinMax.js
+# $.MinMax
 
 ### MinMax is a jQuery based designer tool to synchronize and control reponsive layout changes
 
