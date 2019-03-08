@@ -630,7 +630,7 @@ Updated: 2019-01-19
     
     $.MinMax = minMax;
     
-    // Polyfill
+    // Polyfill for IE
     
     if ( ! Object.entries ) {
         Object.entries = function( obj ){
