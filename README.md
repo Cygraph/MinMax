@@ -15,7 +15,7 @@ Events are only triggered when the resizing action has ended for a certain time.
 
 The provided event object contains informations about the resizing process. For instance orientation, aspectratio, scope, scope index and change.
 
-MinMax can infix the coresponding label in a responsive url. Example: "images/myimg_sm.png" after "up" event: "images/myimg_md.png".
+MinMax can infix the coresponding label in a responsive url. Example: "images/myimg_sm.png" after "up" event: "images/myimg_md.png". Underscore is the default separator.
 
 
 
