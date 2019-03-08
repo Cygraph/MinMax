@@ -105,7 +105,7 @@ function handleScopeChange ( e ) {
     
     var mm = e.instance;
     
-    mm.infix( imgUrl );
+    myImg.src = mm.infix( imgUrl );
     
     if ( e.index < 2 ) {
         doMobileThings();
@@ -125,5 +125,44 @@ function handleScopeChange ( e ) {
 }
 
 ```
+
+In the example above the "infix" method of the instance is used to switch the url and get the right image. MinMax has various instance methods.
+
+### Callback methods
+
+- **on**
+- **off**
+- **up**
+- **down**
+- **changed**
+- **orientated**
+.
+
+### Basic methods
+
+- **update**
+- **define**
+- **infix**
+- **unfix**
+
+Further the instance has setter/getter methods on properties. In general they reflect the event object properties (listed above).
+
+### Setter/Getter
+
+- **label**
+- **min**
+- **max**
+- **index**
+- **prevIndex**
+- **change**
+- **value**
+- **orientation**
+- **ratio**
+- **scopes**
+- **separator**
+- **inertia**
+- **autoUpdate**
+- **callbacks**
+- **hasCallbacks**
 
 **Tip:** Synchronize MinMax scopes with CSS min/max breakpoints
