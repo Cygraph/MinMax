@@ -1,6 +1,6 @@
 # $.MinMax
 
-### MinMax is a jQuery based designer tool to synchronize and control reponsive layout changes
+### MinMax is a jQuery based tool to synchronize and control reponsive layout changes triggered by a window resize event or an orientation change.
 
 MinMax defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
 
