@@ -11,7 +11,7 @@ If a browser resize happens and the width leaves the current scope to enter anot
 - **down** (triggered at change to lower scope)
 - **orientated** (triggered at orientation change - "portrait" or "landscape").
 
-Events are only triggered when the resizing action has ended for a certain time. This behaviour prevents endless calculations. It can be tuned with the "inertia" property (milliseconds). Default is 75. Depending on your concept, values up to 400 can be good. A value of 0 would mean no inertia and normal resize event firing.
+Events are only triggered when the resizing action has ended for a certain time. This behaviour prevents lots of calculations. It can be tuned with the "inertia" property (milliseconds). Default is 75. Depending on your concept, values up to 400 can be good. A value of 0 would mean no inertia and normal resize event firing.
 
 The provided event object contains informations about the resizing process. For instance orientation, aspectratio, scope, scope index and change.
 
