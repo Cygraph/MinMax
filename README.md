@@ -54,7 +54,7 @@ d: { label: "d", min: 2000, max: Infinity }
 
 ```
 
-MinMax creates an instance you can work with over the whole project. For special cases, when different breakpoints are needed, just create a new instance. Based on jQuery's $.Callback object, the callbacks argument can be one function or an array of functions.
+**Callbacks**. MinMax creates an instance you can work with over the whole project. For special cases, when different breakpoints are needed, just create a new instance. Based on jQuery's $.Callback object, the callbacks argument can be one function or an array of functions.
 
 ```
 
@@ -64,7 +64,7 @@ mm.changed([checkLayout, resizeMenu, ... ]);
 
 ```
 
-Unbind handler (jQuery style)
+**Unbind handler** (jQuery style)
 ```
 
 mm.off( "changed", handleScopeChange );
@@ -83,22 +83,22 @@ mm.off();
 
 ### Event object properties
 
-- **event**
-- **instance**
-- **id**
-- **label**
-- **index**
-- **prevIndex**
-- **change**
-- **min**
-- **max**
-- **value**
-- **orientation**
-- **prevOrientation**
-- **ratio**
+- **event** - string
+- **instance** - object
+- **id** - string
+- **label** - string
+- **index** - number
+- **prevIndex** - number
+- **change** - number
+- **min** - number
+- **max** - number
+- **value** - number
+- **orientation** - string
+- **prevOrientation** - string
+- **ratio** - number
 
 
-Callback example
+**Callback example**
 ```
 
 function handleScopeChange ( e ) {
