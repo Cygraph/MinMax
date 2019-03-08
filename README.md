@@ -1,4 +1,5 @@
 # $.MinMax
+Version 0.9.1
 
 #### MinMax is a jQuery based tool to synchronize and control reponsive layout changes triggered by a window resize event or an orientation change
 
