@@ -1,6 +1,6 @@
 # $.MinMax
 
-### MinMax is a jQuery based tool to synchronize and control reponsive layout changes triggered by a window resize event or an orientation change.
+#### MinMax is a jQuery based tool to synchronize and control reponsive layout changes triggered by a window resize event or an orientation change
 
 MinMax creates window width min max scopes defined by breakpoints. Each scope has a label, a min and a max property. The default labels are: "xs", "sm", "md", "lg", "xl". As an example the "md" scope: label: "md", min: 768, max: 1008.
 
@@ -19,7 +19,7 @@ MinMax can infix the coresponding label in a responsive url. Example: "images/my
 
 
 
-Easy use
+**Easy use**
 ```
 
 var minDefs = { xs: 0, sm: 480, md: 768, lg: 1280 };
@@ -54,7 +54,6 @@ mm.orientated( handleOrientationChange );
 
 
 Callback example
-
 ```
 
 function handleScopeChange ( e ) {
