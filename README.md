@@ -35,6 +35,31 @@ mm.down( handleScopeDown )
 mm.orientated( handleOrientationChange );
 
 ```
+MinMax creates an instance you can work with over the whole project. For special cases, when different breakpoints are needed, just create a new instance. Based on jQuery's $.Callback object, the callbacks argument can be one function or an array of functions.
+
+```
+
+mm.changed( handleScopeChange );
+
+mm.changed([checkLayout, resizeMenu, ... ]);
+
+```
+Unbind handler (jQuery style)
+```
+
+mm.off( "changed", handleScopeChange );
+
+
+// all handlers off
+
+mm.off( "changed" );
+
+
+// all events off
+
+mm.off();
+
+```
 
 ### Event object properties
 
@@ -60,7 +85,7 @@ function handleScopeChange ( e ) {
     
     var mm = e.instance;
     
-    mm.infix( imgurl );
+    mm.infix( imgUrl );
     
     if ( e.index < 2 ) {
         doMobileThings();
