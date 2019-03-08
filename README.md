@@ -128,6 +128,13 @@ function handleScopeChange ( e ) {
 
 In the example above the "infix" method of the instance is used to switch the url and get the right image. MinMax has various instance methods.
 
+### Basic methods
+
+- **update**
+- **define**
+- **infix**
+- **unfix**
+
 ### Callback methods
 
 - **on**
@@ -136,14 +143,7 @@ In the example above the "infix" method of the instance is used to switch the ur
 - **down**
 - **changed**
 - **orientated**
-.
 
-### Basic methods
-
-- **update**
-- **define**
-- **infix**
-- **unfix**
 
 Further the instance has setter/getter methods on properties. In general they reflect the event object properties (listed above). Plus some more.
 
