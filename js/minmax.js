@@ -40,7 +40,7 @@ Updated: 2019-01-19
     defaults = {
         breakpoints: undefined,
         separator: "_",
-        inertia: 400,
+        inertia: 75,
         autoUpdate: true,
         callbacks: true
     },

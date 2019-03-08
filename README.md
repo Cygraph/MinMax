@@ -2,31 +2,35 @@
 
 ### MinMax is a jQuery based tool to synchronize and control reponsive layout changes triggered by a window resize event or an orientation change.
 
-MinMax defines scopes with label, min and max properties. It's events are triggered by the window resize event. The inbuilt "inertia" function fires only after the window resizing action has been ended. You can fine tune this behaviour with the "inertia" property.
+MinMax creates window width min max scopes defined by breakpoints. Each scope has a label, a min and a max property. The default labels are: "xs", "sm", "md", "lg", "xl". As an example the "md" scope: label: "md", min: 768, max: 1008.
 
-Min breakpoints are used to calculate the scopes.
-MinMax can infix a label in a responsive url.
-Callbacks can be attached to the following events: 
-
+If a browser resize happens and the width leaves the current scope to enter another scope, MinMax triggers the "changed" event. In case the new scope is larger than before, the "up" event will also be triggered. In case the scope is smaller, its the "down" event.
 
 - **changed** (triggered at any scope change)
 - **up**  (triggered at change to higher scope)
 - **down** (triggered at change to lower scope)
 - **orientated** (triggered at orientation change - "portrait" or "landscape").
 
+Events are only triggered when the resizing action has ended for a certain time. This behaviour prevents endless calculations. It can be tuned with the "inertia" property (milliseconds). Default is 75. Depending on your concept, values up to 400 can be good. A value of 0 would mean no inertia and normal resize event firing.
 
+The provided event object contains informations about the resizing process. For instance orientation, aspectratio, scope, scope index and change.
+
+MinMax can infix the coresponding label in a responsive url. Example: "images/myimg_sm.png" after "up" event: "images/myimg_md.png".
+
+
+
+Easy use
 ```
 
-// First argument: array of "min" breakpoints in entry or object format
-// Second argument: options object or instance id
+var minDefs = { xs: 0, sm: 480, md: 768, lg: 1280 };
 
-var breakpoints = { xs: 0, sm: 480, md: 768, lg: 1280 };
-
-var mm = $.MinMax( breakpoints, "mm1" );
+var mm = $.MinMax( minDefs );
 
 mm.changed( handleScopeChange );
 
 mm.up( handleScopeUp )
+
+mm.down( handleScopeDown )
 
 mm.orientated( handleOrientationChange );
 
@@ -49,7 +53,7 @@ mm.orientated( handleOrientationChange );
 - **ratio**
 
 
-Callback
+Callback example
 
 ```
 
@@ -57,11 +61,7 @@ function handleScopeChange ( e ) {
     
     var mm = e.instance;
     
-    // Update responsive image source
-    // Example former "images/respImg_sm.png"
-    // Example later "images/respImg_lg.png"
-    
-    img.src = mm.infix( img.src );
+    mm.infix( imgurl );
     
     if ( e.index < 2 ) {
         doMobileThings();
@@ -72,65 +72,14 @@ function handleScopeChange ( e ) {
         doBigChangeThings();
     }
     
-    // ...
-}
-
-function handleScopeUp ( e ) {
-    
-    if ( e.index === 3 ) {
-        console.log( "label", e.label );
+    if ( e.ratio < 1 )) {
+        doPortraitThings();
     }
-    
-    if ( e.prevIndex < 2 && e.change > 1 ) {
-        console.log( "can happen", e.change );
-    }
-    
-    // ...
-}
-
-function  handleOrientationChange ( e ) {
-    
-    if ( e.orientation === "portrait" ) {
-        doPortraitLayoutThings();
-    }
-    else if ( e.ratio > 1.6 ) {
-        doBroadLandscapeThings();
-    }
+    else doLandscapeThings();
     
     // ...
 }
 
 ```
 
-### Instance properties
-
-- **prevIndex**:  number / getter
-- **index**:  number / getter
-- **change**:  number / getter
-- **min**:  number / getter
-- **max**:  number / getter
-- **value**:  number / getter
-- **orientation**: string / getter
-- **ratio**: number / getter
-- **scopes**:  array / getter
-- **lable**:  string / getter
-- **separator**:  string / getter-setter
-- **inertia**:  number / getter-setter
-- **autoUpdate**:  boolean / getter-setter
-- **callbacks**:  boolean / getter-setter
-- **hasCallbacks**:  boolean / getter
-
-### Instance methods
-
-- **update()**
-- **define( obj_or_array )**
-- **on( type, callbacks )**
-- **off( type, callbacks )**
-- **changed( callbacks )**
-- **up( callbacks )**
-- **down( callbacks )**
-- **orientated( callbacks )**
-- **infix( url )**
-- **unfix( url )**
-
-**Tip:** Synchronize MinMax with css min / max breakpoints
+**Tip:** Synchronize MinMax scopes with CSS min/max breakpoints
