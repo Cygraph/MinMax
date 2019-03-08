@@ -35,6 +35,25 @@ mm.down( handleScopeDown )
 mm.orientated( handleOrientationChange );
 
 ```
+
+**Define custom labels**. The min breakpoints are used to define the scope. This means, the first value must be 0. The last values max is set to infinity. 
+```
+
+var minDefs = { a: 0, b: 320, c: 800, d: 2000 };
+
+/*
+resulting scopes:
+
+a: { label: "a", min: 0, max: 320 }
+b: ...
+c: ...
+... and the last:
+
+d: { label: "d", min: 2000, max: Infinity }
+
+
+```
+
 MinMax creates an instance you can work with over the whole project. For special cases, when different breakpoints are needed, just create a new instance. Based on jQuery's $.Callback object, the callbacks argument can be one function or an array of functions.
 
 ```
@@ -44,6 +63,7 @@ mm.changed( handleScopeChange );
 mm.changed([checkLayout, resizeMenu, ... ]);
 
 ```
+
 Unbind handler (jQuery style)
 ```
 
