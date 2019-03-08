@@ -165,4 +165,4 @@ Further the instance has setter/getter methods on properties. In general they re
 - **callbacks**
 - **hasCallbacks**
 
-**Tip:** Synchronize MinMax scopes with CSS min/max breakpoints
+**Tip:** Synchronize MinMax scopes with CSS min/max breakpoints and :)
