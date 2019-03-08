@@ -36,7 +36,7 @@ mm.orientated( handleOrientationChange );
 
 ```
 
-**Define custom labels**. The min breakpoints are used to define the scope. This means, the first value must be 0. The last values max is set to infinity. 
+**Define custom labels**. The min breakpoints are used to define the scope. This means, the first value must be 0. The last value of max is set to infinity. 
 ```
 
 var minDefs = { a: 0, b: 320, c: 800, d: 2000 };
