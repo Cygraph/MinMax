@@ -131,19 +131,19 @@ In the example above the "infix" method of the instance is used to switch the ur
 
 ### Basic methods
 
-- **update**
-- **define**
-- **infix**
-- **unfix**
+- **update()** - returns instance
+- **define( breakpoints )** - returns instance
+- **infix( url )** - returns infixed url
+- **unfix( url )** - returns unfixed url
 
 ### Callback methods
 
-- **on**
-- **off**
-- **up**
-- **down**
-- **changed**
-- **orientated**
+- **on( event, callbacks )** - returns instance
+- **off( event, callbacks )** - returns instance
+- **up( callbacks )** - returns instance
+- **down( callbacks )** - returns instance
+- **changed( callbacks )** - returns instance
+- **orientated( callbacks )** - returns instance
 
 
 Further the instance has setter/getter methods on properties. In general they reflect the event object properties (listed above). Plus some more.
