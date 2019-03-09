@@ -150,20 +150,20 @@ Further the instance has setter/getter methods on properties. In general they re
 
 ### Setter/Getter
 
-- **label**
-- **min**
-- **max**
-- **index**
-- **prevIndex**
-- **change**
-- **value**
-- **orientation**
-- **ratio**
-- **scopes**
-- **separator**
-- **inertia**
-- **autoUpdate**
-- **callbacks**
-- **hasCallbacks**
+- **label** - Getter - String
+- **min** - Getter - Number
+- **max** - Getter - Number
+- **index** - Getter - Number
+- **prevIndex** - Getter - Number
+- **change** - Getter - Number
+- **value** - Getter - Number
+- **orientation** - Getter - String
+- **ratio** - Getter - Number
+- **scopes** - Getter - Array
+- **separator** - Getter/Setter - String
+- **inertia** - Getter/Setter - Number
+- **autoUpdate** - Getter/Setter - Boolean
+- **callbacks** - Getter/Setter - Boolean
+- **hasCallbacks** - Getter - Boolean
 
 **Tip:** Synchronize MinMax scopes with CSS min/max breakpoints and :)
