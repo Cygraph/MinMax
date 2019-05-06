@@ -104,7 +104,7 @@ function handleScopeChange ( e ) {
     
     var mm = e.instance;
     
-    myImg.src = mm.infix( imgUrl );
+    myImg.src = mm.infix( myImg.src );
     
     if ( e.index < 2 ) {
         doMobileThings();
