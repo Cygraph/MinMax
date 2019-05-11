@@ -146,7 +146,7 @@ In the example above the "infix" method of the instance is used to switch the ur
 
 Further the instance has setter/getter methods on properties. In general they reflect the event object properties (listed above). Plus some more.
 
-### Setter/Getter
+### Getter/Setter
 
 - **label** - Getter - String
 - **min** - Getter - Number
