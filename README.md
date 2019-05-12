@@ -125,7 +125,7 @@ function handleScopeChange ( e ) {
 
 ```
 
-In the example above the "infix" method of the instance is used to switch the url and get the right image. MinMax has various instance methods.
+In the example above the "infix" method of the instance is used to switch the responsive url and get the right sized image. MinMax has various instance methods.
 
 ### Basic methods
 
