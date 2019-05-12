@@ -3,8 +3,8 @@ File: minmax.js
 Dependencies: jQuery,
 Globals: none
 Designer: © Michael Schwarz, CyDot, info@cydot.de
-Vers. 0.9.1 
-Updated: 2019-01-19
+Vers. 0.9.2 
+Updated: 2019-05-13
 */
 
 ;( function ( $ ) {
@@ -171,7 +171,7 @@ Updated: 2019-01-19
             },
             set: function ( strg ) {
                 if ( typeof strg == "string" ) {
-                    this._setPriv( "separator", strg );
+                    this._configProp( "separator", strg );
                 }
             }
         },
@@ -188,7 +188,7 @@ Updated: 2019-01-19
             },
             set: function ( millisec ) {
                 if ( typeof millisec === "number" && millisec !== null ) {
-                    this._setPriv( "inertia", millisec );
+                    this._configProp( "inertia", millisec );
                 }
             }
         },
@@ -214,7 +214,7 @@ Updated: 2019-01-19
                             this._stopListening();
                         };
                     };
-                    this._setPriv( "autoUpdate", bool );
+                    this._configProp( "autoUpdate", bool );
                 }
             }
         },
@@ -241,7 +241,7 @@ Updated: 2019-01-19
                             this._stopListening();
                         }
                     };
-                    this._setPriv( "callbacksEnabled", bool );
+                    this._configProp( "callbacksEnabled", bool );
                 }
             }
         },
@@ -308,7 +308,7 @@ Updated: 2019-01-19
                 scope = this._scopes[ i ];
 
                 if ( w <= scope.max ) {
-                    this._setPriv( "scope", scope );
+                    this._configProp( "scope", scope );
                     
                     e.value = w;
                     e.ratio = w / $win.height();
@@ -334,8 +334,8 @@ Updated: 2019-01-19
             
             var scopes = this._createScopes( entries );
             
-            this._setPriv( "entries", entries);
-            this._setPriv( "scopes", scopes );
+            this._configProp( "entries", entries);
+            this._configProp( "scopes", scopes );
             this._updateLabels();
             
             return this;
@@ -414,14 +414,6 @@ Updated: 2019-01-19
     
     privMethods = {
         
-        _setPriv: function ( key, value ) {
-            key = "_" + key;
-            var def = Object.getOwnPropertyDescriptor( this, key );
-            
-            def.value = value;
-            Object.defineProperty( this, key, def );
-        },
-        
         _createScopes: function ( entries ) {
             var scopes = [],
             len = entries.length;
@@ -450,7 +442,7 @@ Updated: 2019-01-19
             for ( var i = 0; i < this._scopes.length; i ++ ) {
                 labels.push( this._scopes[ i ].label );
             };
-            this._setPriv( "labels", labels );
+            this._configProp( "labels", labels );
         },
         
         _checkCallbacks: function () {
@@ -458,26 +450,26 @@ Updated: 2019-01-19
         
             for ( var key in cObj ) {
                 if ( cObj.hasOwnProperty( key ) && cObj[ key ].has()) {
-                    this._setPriv( "hasCallbacks", true );
+                    this._configProp( "hasCallbacks", true );
                     return true;
                 }; 
             };
 
-            this._setPriv( "hasCallbacks", false );
+            this._configProp( "hasCallbacks", false );
             return false;
         },
         
         _listen: function () {
             if ( ! this._listening ) {
                 $win.on( "resize", this.__resizeInertia );
-                this._setPriv( "listening", true );
+                this._configProp( "listening", true );
             }
         },
         
         _stopListening: function () {
             if ( this._listening ) {
                 $win.off( "resize", this.__resizeInertia );
-                this._setPriv( "listening", false );
+                this._configProp( "listening", false );
             }
         },
         
@@ -574,14 +566,22 @@ Updated: 2019-01-19
             return strg;
         },
         
+        _configProp: function ( key, value ) {
+            key = "_" + key;
+            var def = Object.getOwnPropertyDescriptor( this, key );
+            
+            def.value = value;
+            Object.defineProperty( this, key, def );
+        },
+        
         _configEventObject: function () {
-            this._setPriv( "eventObj", $.extend({}, eventObj ));
+            this._configProp( "eventObj", $.extend({}, eventObj ));
             this._eventObj.instance = this;
             this._eventObj.id = this.id;
         },
         
         _configCallbacks: function () {
-            this._setPriv( "callbacks", $.extend({}, callbacks ));
+            this._configProp( "callbacks", $.extend({}, callbacks ));
             
             for ( var key in this._callbacks ) {
                 var def = Object.getOwnPropertyDescriptor( this._callbacks, key );
